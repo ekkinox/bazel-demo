@@ -35,7 +35,7 @@ bazel run //backend
 To start the go gRPC client, located in the [client](client) folder:
 
 ```shell
-bazel run //backend
+bazel run //client
 ```
 
 To start the go gRPC gateway, located in the [gateway](gateway) folder (will listen on `:8888`):
