@@ -7,7 +7,7 @@ go_library(
     visibility = ["//visibility:private"],
     deps = [
         "//proto/calculator",
-        "@com_github_grpc_ecosystem_grpc_gateway_v2//runtime:go_default_library",
+        "@com_github_grpc_ecosystem_grpc_gateway_v2//runtime",
         "@org_golang_google_grpc//:go_default_library",
     ],
 )

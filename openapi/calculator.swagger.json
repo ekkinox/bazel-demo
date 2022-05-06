@@ -1,0 +1,126 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/calculator/calculator.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CalculatorService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/calculate": {
+      "post": {
+        "summary": "Unary rpc",
+        "operationId": "CalculatorService_Calculate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/calculatorOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/calculatorOperationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CalculatorService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "calculatorOperation": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/calculatorOperator"
+        },
+        "number1": {
+          "type": "number",
+          "format": "float"
+        },
+        "number2": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "calculatorOperationRequest": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/calculatorOperation"
+        }
+      }
+    },
+    "calculatorOperationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "calculatorOperator": {
+      "type": "string",
+      "enum": [
+        "OPERATOR_UNSPECIFIED",
+        "OPERATOR_SUM",
+        "OPERATOR_DIFF",
+        "OPERATOR_PRODUCT",
+        "OPERATOR_QUOTIENT"
+      ],
+      "default": "OPERATOR_UNSPECIFIED"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
