@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "backend_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/ekkinox/bazel-demo/backend",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//proto/calculator",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//reflection:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "backend",
+    embed = [":backend_lib"],
+    visibility = ["//visibility:public"],
+)

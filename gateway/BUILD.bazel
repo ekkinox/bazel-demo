@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "gateway_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/ekkinox/bazel-demo/gateway",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//proto/calculator",
+        "@com_github_grpc_ecosystem_grpc_gateway_v2//runtime:go_default_library",
+        "@org_golang_google_grpc//:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "gateway",
+    embed = [":gateway_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "github.com/ekkinox/bazel-demo/proto/calculator";
+
+import "google/api/annotations.proto";
+
+enum Operator {
+  OPERATOR_UNSPECIFIED = 0;
+  OPERATOR_SUM = 1;
+  OPERATOR_DIFF = 2;
+  OPERATOR_PRODUCT = 3;
+  OPERATOR_QUOTIENT = 4;
+}
+
+message Operation {
+  Operator operator = 1;
+  float number1 = 2;
+  float number2 = 3;
+}
+
+message OperationRequest {
+  Operation operation = 1;
+}
+
+message OperationResponse {
+  float result = 1;
+}
+
+service CalculatorService {
+  // Unary rpc
+  rpc Calculate(OperationRequest) returns (OperationResponse) {
+    option (google.api.http) = {
+      post: "/v1/calculate"
+      body: "*"
+    };
+  };
+}
